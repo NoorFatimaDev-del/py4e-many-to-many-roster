@@ -1,39 +1,37 @@
-Student Roster Many-to-Many Database System
+Multi-Entity Student Roster Database System
 📌 Project Overview
-This project demonstrates the implementation of a Many-to-Many relationship using Python and SQLite. The application parses complex student enrollment data from a JSON format and structures it into a relational database with optimized normalization.
+This project demonstrates a robust data pipeline that parses complex student enrollment data from JSON format into a fully normalized SQLite Relational Database. The core achievement is modeling a Many-to-Many relationship using industry-standard schema design.
 
-🛠️ Technical Features
-JSON Parsing: Extracts user, course, and role data from nested JSON structures.
+🛠️ Technical Stack
+Language: Python 3.x
 
-Database Schema: Implements three tables: User, Course, and a junction table Member.
+Database Engine: SQLite3
 
-Relational Logic: Models Many-to-Many relationships where multiple students can be enrolled in multiple courses.
+Data Interchange: JSON
 
-Data Integrity: Utilizes INSERT OR IGNORE and UNIQUE constraints to prevent data duplication.
+Architecture: Relational Database Management (RDBMS)
 
-SQL Mastery: Features complex JOIN queries to reconstruct relationships for reporting.
+🏗️ Database Architecture
+To ensure data integrity and eliminate redundancy, the system utilizes a three-table structure:
 
-📁 Database Schema
-The system follows a normalized relational structure:
+User Table: Unique student records.
 
-User Table: Stores unique student names.
+Course Table: Unique academic course titles.
 
-Course Table: Stores unique course titles.
+Member Table (Junction): Connects users and courses with assigned roles.
 
-Member Table (Junction): Links Users and Courses while storing the specific role (Student/Instructor) for that relationship.
+🚀 Key Features
+Data Normalization: Successfully resolved many-to-many complexities into two one-to-many relationships.
 
-🚀 How to Run
-Clone the repository:
+Efficient Logic: Implemented INSERT OR IGNORE and UNIQUE constraints to maintain a clean dataset.
 
-Bash
-git clone https://github.com/your-username/your-repo-name.git
-Ensure you have the data file: Place roster_data.json in the project directory.
+Advanced Querying: Employs multi-table JOIN statements to reconstruct and report on interconnected data.
 
-Execute the script:
+📊 Sample SQL Query
+The following logic was used to extract the relationship data for verification:
 
-Bash
-python roster.py
-View Results: Open rosterdb.sqlite in any SQLite browser to view the populated tables.
-
-🎓 Learning Outcomes
-This project was completed as part of the Using Databases with Python course by the University of Michigan. It highlights my ability to bridge the gap between Python scripting and relational database management systems (RDBMS).
+SQL
+SELECT User.name, Course.title, Member.role 
+FROM User JOIN Member JOIN Course 
+ON User.id = Member.user_id AND Member.course_id = Course.id
+ORDER BY User.name DESC;
